@@ -13,5 +13,5 @@ def squarePossible(x):
         else:
             R = mid - 1
     return -1
-
-print(squarePossible(36))
+n = int(input("Enter the number :"))
+print(squarePossible(n))
