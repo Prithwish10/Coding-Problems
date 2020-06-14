@@ -4,6 +4,8 @@ public class ReverseList {
 	ListNode head;
 	ListNode temp;
 	
+	//Function to Insert Elements into the List
+	//Time Complexity : O(1)
 	public void insert(int val) {
 		
 		if(head == null) {
@@ -22,7 +24,7 @@ public class ReverseList {
 		ListNode t = head;
 		reverse(t);
 	}
-	
+	//Function to reverse a list recursively
 	public void reverse(ListNode p) {
 		
 		if(p.next == null) {
@@ -44,7 +46,8 @@ public class ReverseList {
 			temp = temp.next;
 		}
 	}
-	
+	//Function to reverse a list iteratively
+	//Time Complexity : O(n)
 	public ListNode reverse1(ListNode node) {
 		
 		ListNode next = node;
@@ -60,6 +63,20 @@ public class ReverseList {
 		}
 		return prev;
 	}
+	
+	//Reverse recursively but in this case return the head of the reverse list
+	public ListNode reverse2(ListNode node) {
+		
+		if(node == null || node.next == null)
+			return node;
+		
+		ListNode rev_head = reverse2(node.next);
+		
+		node.next.next = node;
+		node.next = null;
+		
+		return rev_head;
+	}
 	public static void main(String args[]) {
 		
 		ReverseList rev = new ReverseList();
@@ -71,7 +88,7 @@ public class ReverseList {
 		rev.traverse(rev.head);
 		
 		System.out.println("\nReversed List ->");
-		rev.head = rev.reverse1(rev.head);
+		rev.head = rev.reverse2(rev.head);
 		rev.traverse(rev.head);
 	}
 }
