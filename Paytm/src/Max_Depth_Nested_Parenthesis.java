@@ -31,8 +31,11 @@ public class Max_Depth_Nested_Parenthesis {
 		String s = sc.next();
 		
 		System.out.println(findMaxDepth(s));
+		
+		System.out.println(findDepth1(s));
 	}
-	
+	//Time : O(n)
+	//Space : O(n)
 	public static int findMaxDepth(String s) {
 		
 		Stack<Character> stack = new Stack<Character>();
@@ -57,5 +60,34 @@ public class Max_Depth_Nested_Parenthesis {
 		if(stack.size() == 0)
 			return max;
 		return -1;
+	}
+	//Time : O(n)
+	//Space : O(1)
+	public static int findDepth1(String s) {
+		
+		int current_max = 0;
+		int global_max = 0;
+		char temp = ' ';
+		
+		for(int i = 0; i < s.length(); i++) {
+			
+			temp = s.charAt(i);
+			
+			if(temp == '(')
+				current_max += 1;
+			
+			else if(temp == ')') {
+				if(current_max == 0)
+					return -1;
+				else
+					current_max -= 1;
+			}
+			else
+				global_max = Math.max(current_max, global_max);
+		}
+		if(current_max == 0)
+			return global_max;
+		return -1;
+			
 	}
 }
