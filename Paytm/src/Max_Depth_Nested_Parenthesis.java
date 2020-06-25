@@ -28,7 +28,7 @@ public class Max_Depth_Nested_Parenthesis {
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the string :");
-		String s = sc.next();
+		String s = sc.nextLine();
 		
 		System.out.println(findMaxDepth(s));
 		
