@@ -42,6 +42,9 @@ public class SubSet_Sum {
 		if(n == 0)
 			return cache[n][sum] = false;
 		
+		if(cache[n][sum] != false)
+			return cache[n][sum];
+		
 		if(set[n - 1] > sum)
 			return cache[n][sum] = isPresent1(set, cache, sum, n - 1);
 		
