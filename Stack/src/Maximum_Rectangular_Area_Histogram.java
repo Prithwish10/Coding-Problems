@@ -58,7 +58,7 @@ public class Maximum_Rectangular_Area_Histogram {
 			
 			int cur = ar[i];
 			
-			while(!stack.isEmpty() && stack.peek().ele > cur)
+			while(!stack.isEmpty() && stack.peek().ele >= cur)
 				stack.pop();
 			
 			if(stack.isEmpty())
@@ -90,7 +90,7 @@ public class Maximum_Rectangular_Area_Histogram {
 			
 			int cur = ar[i];
 			
-			while(!stack.isEmpty() && stack.peek().ele > cur)
+			while(!stack.isEmpty() && stack.peek().ele >= cur)
 				stack.pop();
 			
 			if(stack.isEmpty())
