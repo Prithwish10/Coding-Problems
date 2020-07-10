@@ -13,10 +13,14 @@ public class Rain_Water_Trapping {
 		for(int i = 0; i < n; i++)
 			ar[i] = sc.nextInt();
 		
-		findWaterTrapped(ar, n);
-	}
-	public static void findWaterTrapped(int ar[], int n) {
+		int res = findWaterTrapped(ar, n);
 		
+		System.out.println(res);
+	}
+	public static int findWaterTrapped(int ar[], int n) {
+		
+		if(n == 0)
+			return 0;
 		int mxl[] = findMxl(ar, n);
 		int mxr[] = findMxr(ar, n);
 		
@@ -25,7 +29,7 @@ public class Rain_Water_Trapping {
 			
 			sum += Math.min(mxl[i], mxr[i]) - ar[i];
 		}
-		System.out.println(sum);
+		return sum;
 	}
 	public static int[] findMxl(int ar[], int n) {
 		
