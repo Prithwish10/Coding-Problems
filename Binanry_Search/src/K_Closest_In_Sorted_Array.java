@@ -20,58 +20,81 @@ public class K_Closest_In_Sorted_Array {
 		
 		System.out.println("Enter k :");
 		int k = sc.nextInt();
-		findKClosest(ar, n, k, key);;
+		
+		List<Integer> res = findKClosest(ar, n, k, key);
+		
+		System.out.println(res);
 	}
-	public static int search(int ar[], int low, int high, int k, int key) {
+	public static int search(int ar[], int n, int key) {
 		
-		if(low > high)
-			return -1;
+		int L = 0;
+		int H = n - 1;
 		
-		int mid = low + (high - low)/2;
+		while(L <= H) {
+			
+			int mid = L + (H - L)/2;
+			
+			if(ar[mid] == key)
+				return mid;
+			
+			else if(ar[mid] < key) {
+				L = mid + 1;
+			}
+			else {
+				H = mid - 1;
+			}
+		}
+			
+		if(H < 0)
+            return L;
+        
+        if(L >= n)
+            return H;
 		
-		if(ar[mid] == key)
-			return mid;
+		int hiDiff = Math.abs(ar[H] - key);
+		int lowDiff = Math.abs(ar[L] - key);
 		
-		else if(key < ar[mid])
-			return search(ar, low, high - 1, k, key);
-		else
-			return search(ar, mid + 1, high, k, key);
+		return hiDiff <= lowDiff ? H : L;
 	}
-	public static void findKClosest(int ar[], int n, int k, int key) {
-		
-		int keyIndex = search(ar, 0, n, k, key);
-		
-		int l = keyIndex - 1;
-		int h = keyIndex + 1;
-		int count = 0;
+	public static List<Integer> findKClosest(int ar[], int n, int k, int key) {
 		
 		List<Integer> list = new ArrayList<Integer>();
 		
+		if(ar == null || ar.length == 0)
+			return list;
+		
+		int keyIndex = search(ar, n, key);
+		System.out.println(keyIndex);
+		int l = keyIndex - 1;
+		int h = keyIndex + 1;
+		int count = 1;
+		
+		
 		while(l >= 0 && h < n && count < k) {
-			System.out.println(l+" "+h);
-			if(ar[keyIndex] - ar[l] < ar[h] - ar[keyIndex]) {
-				list.add(ar[l]);
+			
+			if(key - ar[l] <= ar[h] - key) {
 				l --;
 			}
 			else {
-				list.add(ar[h]);
 				h ++;
 			}
 			count ++;
 			
 		}
 		while(count < k && l < 0 && h < n) {
-			list.add(ar[h]);
+			
 			count ++;
 			h ++;
 		}
 		while(count < k && h == n && l >= 0) {
-			list.add(ar[l]);
+			
 			count ++;
 			l --;
 		}
+		System.out.println(l+" "+h);
+		for(int i = l + 1; i < h; i++)
+			list.add(ar[i]);
 		
-		for(int i : list)
-			System.out.print(i+" ");
+		return list;
 	}
 }
