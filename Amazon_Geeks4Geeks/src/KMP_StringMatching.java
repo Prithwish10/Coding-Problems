@@ -36,7 +36,6 @@ public class KMP_StringMatching {
 				j ++;
 			}
 			if(j == M) {
-				
 				System.out.println("First position the match occurs at "+(i - j));
 				j = prefixArray[j - 1];
 			}
