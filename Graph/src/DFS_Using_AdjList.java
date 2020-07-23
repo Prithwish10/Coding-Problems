@@ -58,6 +58,21 @@ public class DFS_Using_AdjList {
 		}
 	}
 	
+	public static void dfs_recur(Map<Integer, ArrayList<Integer>> adj, Set<Integer> set, int src, int v) {
+		
+		set.add(src);
+		
+		System.out.print(src+" ");
+		
+		for(int i = 0; i < adj.get(src).size(); i++) {
+			
+			int j = adj.get(src).get(i);
+			
+			if(!set.contains(j))
+				dfs_recur(adj, set, j, v);
+		}
+	}
+	
 	public static void main(String args[]) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -84,6 +99,10 @@ public class DFS_Using_AdjList {
 		int src = sc.nextInt();
 		
 		dfs(adj, src, V);
+		
+		System.out.println();
+		Set<Integer> set = new HashSet<>();
+		dfs_recur(adj, set, src, V);
 	}
 }
 
