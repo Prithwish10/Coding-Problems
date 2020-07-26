@@ -48,34 +48,26 @@ public class Maximum_Rectangular_Area_Histogram {
 	}
 	public static int[] findNextSmallerRight(int ar[], int n) {
 		
-		int nsr[] = new int[n];
-		
 		Stack<Object> stack = new Stack<>();
-		
-		int index = 0;
-		
-		for(int i = n - 1; i >= 0; i --) {
-			
-			int cur = ar[i];
-			
-			while(!stack.isEmpty() && stack.peek().ele >= cur)
-				stack.pop();
-			
-			if(stack.isEmpty())
-				nsr[index ++] = n;
-			else
-				nsr[index ++] = stack.peek().index;
-			
-			stack.add(new Object(cur, i));
-		}
-		
-		for(int i = 0; i < n/2; i++) {
-			int temp = nsr[i];
-			nsr[i] = nsr[n - i - 1];
-			nsr[n - i - 1] = temp;
-		}
-
-		return nsr;
+        int res[] = new int[n];
+        int index = n - 1;
+        
+        for(int i = n - 1; i >= 0; i--){
+            
+            int cur = ar[i];
+            
+            while(!stack.isEmpty() && stack.peek().ele >= cur)
+                stack.pop();
+            
+            if(stack.isEmpty())
+                res[index --] = n;
+            
+            else
+                res[index --] = stack.peek().index;
+            
+            stack.add(new Object(cur, i));
+        }
+        return res;
 	}
 	
 	public static int[] findNextSmallerLeft(int ar[], int n) {
