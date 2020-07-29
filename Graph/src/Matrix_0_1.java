@@ -37,7 +37,6 @@ public class Matrix_0_1 {
 	public static int[][] find_0_1_Matrix(int grid[][], int r, int c) {
 		
 		int result[][] = new int[r][c];
-		//int visited[][] = new int[r][c];
 		
 		for(int i = 0; i < r; i++) {
 			
@@ -71,22 +70,22 @@ public class Matrix_0_1 {
 			if(grid[x][y] == 0)
 				return dis;
 			
-			if(isSafe(grid, x, y + 1)) {// && grid[x][y + 1] == 1
+			if(isSafe(grid, x, y + 1) && visited[x][y + 1] == 0) {
 				queue.add(new Object(x, y + 1, dis + 1));
 				visited[x][y + 1] = 1;
 			}
 			
-			if(isSafe(grid, x, y - 1)) {// && grid[x][y - 1] == 1
+			if(isSafe(grid, x, y - 1) && visited[x][y - 1] == 0) {
 				queue.add(new Object(x, y - 1, dis + 1));
 				visited[x][y - 1] = 1;
 			}
 			
-			if(isSafe(grid, x + 1, y)) {// && grid[x + 1][y] == 1
+			if(isSafe(grid, x + 1, y) && visited[x + 1][y] == 0) {
 				queue.add(new Object(x + 1, y, dis + 1));
 				visited[x + 1][y] = 1;
 			}
 			
-			if(isSafe(grid, x - 1, y)) {// && grid[x - 1][y] == 1
+			if(isSafe(grid, x - 1, y) && visited[x - 1][y] == 0) {
 				queue.add(new Object(x - 1, y, dis + 1));
 				visited[x - 1][y] = 1;
 			}
@@ -101,6 +100,66 @@ public class Matrix_0_1 {
 		
 		return true;
 	}
+	
+	//Optimized Solution
+	//First Insert the zeroes into the queue
+	//Then check for the adjacent (up, down left, right)
+	//Maintain the visited array
+	//pop each object from the queue and check whether the adjacent element are not visited and if they are 1
+	//If not visited and alo the adjacent element is 1 then add the position of that element into the queue
+	//and also update that element by 1 + the element that is popped
+	public int[][] updateMatrix(int[][] grid) {
+        
+        if(grid == null)
+            return new int[][]{{}};
+        
+        int r = grid.length;
+        int c = grid[0].length;
+        
+        Queue<Object1> queue = new LinkedList<Object1>();
+        int visited[][] = new int[r][c];
+        
+        for(int i = 0; i < r; i++){
+            
+            for(int j = 0; j < c; j++){
+                
+                if(grid[i][j] == 0){
+                    queue.add(new Object1(i, j));
+                    visited[i][j] = 1;
+                }
+            }
+        }
+        
+        while(!queue.isEmpty()){
+            
+            Object1 temp = queue.poll();
+            
+            int x = temp.x;
+            int y = temp.y;
+            
+            if(isSafe(grid, x, y - 1) && visited[x][y - 1] == 0 && grid[x][y - 1] == 1){
+                queue.add(new Object1(x, y - 1));
+                grid[x][y -1] = grid[x][y] + 1;
+                visited[x][y - 1] = 1;
+            }
+            if(isSafe(grid, x, y + 1) && visited[x][y + 1] == 0 && grid[x][y + 1] == 1){
+                queue.add(new Object1(x, y + 1));
+                grid[x][y + 1] = grid[x][y] + 1;
+                visited[x][y + 1] = 1;
+            }
+            if(isSafe(grid, x - 1, y) && visited[x - 1][y] == 0 && grid[x - 1][y] == 1){
+                queue.add(new Object1(x - 1, y));
+                grid[x - 1][y] = grid[x][y] + 1;
+                visited[x - 1][y] = 1;
+            }
+            if(isSafe(grid, x + 1, y) && visited[x + 1][y] == 0 && grid[x + 1][y] == 1){
+                queue.add(new Object1(x + 1, y));
+                grid[x + 1][y] = grid[x][y] + 1;
+                visited[x + 1][y] = 1;
+            }
+        }
+        return grid;
+    }
 }
 class Object{
 	
@@ -109,5 +168,13 @@ class Object{
 		this.x = x;
 		this.y = y;
 		this.dis = dis;
+	}
+}
+class Object1{
+	
+	int x, y;
+	Object1(int x, int y){
+		this.x = x;
+		this.y = y;
 	}
 }
