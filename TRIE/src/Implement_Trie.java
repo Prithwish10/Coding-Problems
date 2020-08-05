@@ -28,6 +28,7 @@ class Implement_Trie {
             current = node;
         }
         current.endOfWord = true;
+		
     }
     
     /** Returns if the word is in the trie. */
@@ -77,9 +78,10 @@ class Implement_Trie {
     	obj.insert("abcd");
     	obj.insert("lmn");
     	obj.insert("abghi");
+    	obj.insert("geeksforgeeks");
     	
     	System.out.println(obj.search("abc"));
-    	System.out.print(obj.startsWith("ghi"));
+    	System.out.print(obj.startsWith("geeks"));
     }
 }
 /**
