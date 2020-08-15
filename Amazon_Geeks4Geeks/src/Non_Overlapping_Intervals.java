@@ -1,7 +1,8 @@
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
-
+//Given a collection of intervals, find the minimum number of intervals you need to remove to 
+//make the rest of the intervals non-overlapping.
 public class Non_Overlapping_Intervals {
 
 	static class Pair{
@@ -55,9 +56,9 @@ public class Non_Overlapping_Intervals {
 			
 			public int compare(int[] o1, int[] o2) {
 				
-				if(o1[1] != o1[1])
+				if(o1[1] != o2[1])
 					return o1[1] - o2[1];
-				return o2[0] - o2[1];
+				return o2[0] - o1[0];
 			}
 		});*/
 		
