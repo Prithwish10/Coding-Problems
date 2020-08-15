@@ -49,6 +49,18 @@ public class Non_Overlapping_Intervals {
 				return x2 - x1;
 			}	
 		});
+		//            OR
+		/*Arrays.sort(ar, new Comparator<int[]>(){
+
+			
+			public int compare(int[] o1, int[] o2) {
+				
+				if(o1[1] != o1[1])
+					return o1[1] - o2[1];
+				return o2[0] - o2[1];
+			}
+		});*/
+		
 //		for(Pair i : p)
 //			System.out.println(i.x+" "+i.y);
 		int count = 0;
