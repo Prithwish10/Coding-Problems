@@ -1,7 +1,7 @@
 import java.util.*;
 public class Minimum_Time_To_Collect_All_Apples_In_A_Tree {
 
-public int minTime(int n, int[][] edges, List<Boolean> hasApple) {
+	public int minTime(int n, int[][] edges, List<Boolean> hasApple) {
         
         Map<Integer, ArrayList<Integer>> adj = new HashMap<>();
         
@@ -38,4 +38,6 @@ public int minTime(int n, int[][] edges, List<Boolean> hasApple) {
         }
         return (appleCount != 0 || hasApple.get(node)) ? (node == 0 ? appleCount : appleCount + 2) : 0;
     }
+
 }
+
