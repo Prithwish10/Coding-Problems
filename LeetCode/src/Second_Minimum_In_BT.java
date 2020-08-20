@@ -39,4 +39,31 @@ public class Second_Minimum_In_BT {
         helper(root.left);
         helper(root.right);
     }
+    //*************** O(n)*******************
+    //Map<Integer, Integer> map = new HashMap<>();
+    int fm = Integer.MAX_VALUE, sm = Integer.MAX_VALUE, max = 0;
+    public int findSecondMinimumValue1(TreeNode root) {
+        
+        helper(root);
+        
+        if(map.size() == 2 && map.containsKey(Integer.MAX_VALUE) && sm == Integer.MAX_VALUE)
+            return Integer.MAX_VALUE;
+        
+        return sm == Integer.MAX_VALUE ? -1 : sm;
+    }
+    public void helper1(TreeNode root){
+        
+        if(root == null)
+            return;
+        
+        map.put(root.val, 1);
+        
+        fm = Math.min(fm, root.val);
+        
+        if(root.val < sm && root.val > fm)
+            sm = root.val;
+        
+        helper(root.left);
+        helper(root.right);
+    }
 }
