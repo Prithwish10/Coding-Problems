@@ -26,26 +26,20 @@ class Search_Insert_Position {
         if(nums == null || nums.length == 0)
             return 0;
         
-        int pos = -1;
+        int L = 0, H = nums.length - 1;
         
-        int L = 0;
-        int R = nums.length - 1;
-        
-        while(L <= R){
+        while(L <= H){
             
-            int mid = L + (R - L)/2;
+            int mid = L + (H - L)/2;
             
             if(nums[mid] == target)
                 return mid;
-            else if(nums[mid] > target){
-                pos = mid;
-                R = mid - 1;
-            }
-            else
+            else if(nums[mid] < target)
                 L = mid + 1;
+            else
+                H = mid - 1;
         }
-        
-        return pos == -1 ? nums.length : pos;
+        return L;
     }
     public static void main(String args[]) {
     	
