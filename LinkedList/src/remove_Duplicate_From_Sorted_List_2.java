@@ -48,4 +48,36 @@ public class remove_Duplicate_From_Sorted_List_2 {
         t.next = null;
         return new_head.next;
     }
+	//******* Time : O(n) ****** Space : O(1) ******
+	public ListNode deleteDuplicates1(ListNode head) {
+        
+        if(head == null)
+            return null;
+        if(head.next == null)
+            return head;
+        
+        ListNode dummy = new ListNode();
+        
+        ListNode prev = dummy;
+        ListNode curr = head;
+        ListNode t = null;
+        
+        while(curr != null){
+            
+            t = curr.next;
+            
+            while(t != null && t.val == curr.val){
+                t = t.next;
+            }
+            if(curr.next == t){
+                
+                prev.next = curr;
+                prev = prev.next;
+            }
+            curr = t;
+        }
+        if(curr == null)
+            prev.next = null;
+        return dummy.next;
+    }
 }
