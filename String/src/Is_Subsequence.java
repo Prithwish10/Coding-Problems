@@ -20,6 +20,7 @@
 //Output: false
 public class Is_Subsequence {
 
+	//Time : O(t.length())
 	public boolean isSubsequence(String s, String t) {
         
         if(s == null || t == null || (t.length() == 0 && s.length() != 0))
