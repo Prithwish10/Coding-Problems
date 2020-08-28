@@ -77,6 +77,7 @@ public class K_Closest_Number {
 	//Approach 3
 	//Time - O(n log K)
 	//Space - O(n)
+	// For Duplicate elements in the array this approach will give different answer
 	public static void findKClosest2(int ar[], int n, int k, int cn) {
 		
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
