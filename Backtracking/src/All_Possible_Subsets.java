@@ -50,5 +50,6 @@ class All_Possible_Subsets {
     	for(List<Integer> i : res)
     		System.out.println(i);
     }
+    
 }
 
