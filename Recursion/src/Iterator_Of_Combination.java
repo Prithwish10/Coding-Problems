@@ -1,51 +1,59 @@
+//Design an Iterator class, which has:
+//
+//A constructor that takes a string characters of sorted distinct lowercase English letters and a number combinationLength as arguments.
+//A function next() that returns the next combination of length combinationLength in lexicographical order.
+//A function hasNext() that returns True if and only if there exists a next combination.
+// 
+//
+//Example:
+//
+//CombinationIterator iterator = new CombinationIterator("abc", 2); // creates the iterator.
+//
+//iterator.next(); // returns "ab"
+//iterator.hasNext(); // returns true
+//iterator.next(); // returns "ac"
+//iterator.hasNext(); // returns true
+//iterator.next(); // returns "bc"
+//iterator.hasNext(); // returns false
+
 import java.util.*;
 
 public class Iterator_Of_Combination {
 
-	List<List<Character>> res;
-    int pos;
+	Queue<String> queue;
     
     public Iterator_Of_Combination(String characters, int combinationLength) {
         
-        res = new LinkedList<>();
-        pos = 0;
+        queue = new LinkedList<>();
         
-        LinkedList<Character> list = new LinkedList<>();
+        StringBuilder sb = new StringBuilder();
         
-        char ch[] = characters.toCharArray();
-        
-        distinctSubsequence(ch, 0, combinationLength, list);
+        distinctSubsequence(characters, 0, combinationLength, sb);
     }
     
     public String next() {
         
-        List<Character> list = res.get(pos);
-        String s = "";
-        for(char c : list)
-            s += c;
-        pos ++;
-        return s;
+        return queue.poll();
     }
     
     public boolean hasNext() {
         
-        if(pos >= res.size())
+        if(queue.isEmpty())
             return false;
         return true;
     }
-    public void distinctSubsequence(char ar[], int p, int len, LinkedList<Character> list) {
+    public void distinctSubsequence(String s, int p, int len, StringBuilder sb) {
 		
-		if(p >= ar.length) {
-			if(list.size() == len)
-				res.add(new LinkedList<>(list));
+		if(p >= s.length()) {
+			if(sb.length() == len)
+				queue.add(new String(sb));
 			return;
 		}
 		
-		list.add(ar[p]);
-		distinctSubsequence(ar, p + 1, len, list);
+		sb.append(s.charAt(p));
+		distinctSubsequence(s, p + 1, len, sb);
 		
-		list.removeLast();
-		
-		distinctSubsequence(ar, p + 1, len, list);
+		sb.deleteCharAt(sb.length() - 1);
+		distinctSubsequence(s, p + 1, len, sb);
 	}
 }
